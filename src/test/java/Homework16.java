@@ -31,7 +31,6 @@ public class Homework16 extends BaseTest{
         WebElement registrationText = driver.findElement(By.cssSelector("span[class='small']"));
         Assert.assertTrue(registrationText.isDisplayed());
 
-        driver.quit();
 
 
 
