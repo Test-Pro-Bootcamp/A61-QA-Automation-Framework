@@ -11,9 +11,7 @@ import java.time.Duration;
 public class LoginTests extends BaseTest {
     @Test
     public void loginEmptyEmailPassword() {
-
-        url = "https://qa.koel.app/";
-        driver.get(url);
+        navigateToWebsite("https://qa.koel.app/");
         Assert.assertEquals(driver.getCurrentUrl(), url);
     }
 
@@ -21,25 +19,38 @@ public class LoginTests extends BaseTest {
     public void loginWithEmailAndPassword() {
 
         // Step 1
-        url = "https://qa.koel.app/";
-        driver.get(url);
+        navigateToWebsite("https://qa.koel.app/");
 
         // Step 2
-        WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
-        emailField.clear();
-        emailField.sendKeys("barrau89@gmail.com");
+        inputEmail("barrau89@gmail.com");
 
         // Step 3
-        WebElement passwordField = driver.findElement(By.cssSelector("input[type='password']"));
-        passwordField.clear();
-        passwordField.sendKeys("te$t$tudent");
+        inputPassword("te$t$tudent");
 
         // Step 4
+        clickLoginButton();
+    }
+
+    public void navigateToWebsite(String url){
+        driver.get(url);
+    }
+
+    public void inputEmail(String email){
+        WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
+        emailField.clear();
+        emailField.sendKeys(email);
+    }
+
+    public void inputPassword(String password) {
+        WebElement passwordField = driver.findElement(By.cssSelector("input[type='password']"));
+        passwordField.clear();
+        passwordField.sendKeys(password);
+    }
+
+    public void clickLoginButton(){
         WebElement loginButton = driver.findElement(By.cssSelector("button[type='submit']"));
         loginButton.click();
-
-
-
-
     }
+
+
 }
