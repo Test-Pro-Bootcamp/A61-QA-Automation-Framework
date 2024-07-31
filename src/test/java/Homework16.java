@@ -10,7 +10,7 @@ public class Homework16 extends BaseTest{
 
         // Using Selenium, navigate to "https://qa.koel.app/"
         url = "https://qa.koel.app/";
-        driver.get(url);
+        navigateToWebsite(url);
 
         // Click the registration link
         WebElement registrationButton = driver.findElement(By.cssSelector("a[href='registration']"));
