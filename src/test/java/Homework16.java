@@ -16,22 +16,22 @@ public class Homework16 extends BaseTest{
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
 
-        WebDriver homework16 = new ChromeDriver(options);
-        homework16.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        WebDriver driver = new ChromeDriver(options);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 
         // Using Selenium, navigate to "https://qa.koel.app/"
         String website = "https://qa.koel.app/";
-        homework16.get(website);
+        driver.get(website);
 
         // Click the registration link
-        WebElement registrationButton = homework16.findElement(By.cssSelector("a[href='registration']"));
+        WebElement registrationButton = driver.findElement(By.cssSelector("a[href='registration']"));
         registrationButton.click();
 
         // Verify being redirected to Registration page
-        WebElement registrationText = homework16.findElement(By.cssSelector("span[class='small']"));
+        WebElement registrationText = driver.findElement(By.cssSelector("span[class='small']"));
         Assert.assertTrue(registrationText.isDisplayed());
 
-        homework16.quit();
+        driver.quit();
 
 
 
