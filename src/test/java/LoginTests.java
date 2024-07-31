@@ -10,7 +10,7 @@ public class LoginTests extends BaseTest {
     @Test
     public void loginEmptyEmailPassword() {
 
-        String url = "https://qa.koel.app/";
+        url = "https://qa.koel.app/";
         driver.get(url);
         Assert.assertEquals(driver.getCurrentUrl(), url);
 
