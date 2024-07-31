@@ -1,25 +1,32 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
-
 public class LoginTests extends BaseTest {
+
+    String url = "https://qa.koel.app/";
+
+
     @Test
     public void loginEmptyEmailPassword() {
-
-//      Added ChromeOptions argument below to fix websocket error
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-        String url = "https://qa.koel.app/";
-        driver.get(url);
+        navigateToWebsite(url);
         Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
     }
+
+    @Test
+    public void loginWithEmailAndPassword() {
+
+        // Step 1
+        navigateToWebsite(url);
+
+        // Step 2
+        inputEmail("barrau89@gmail.com");
+
+        // Step 3
+        inputPassword("te$t$tudent");
+
+        // Step 4
+        clickLoginButton();
+    }
+
+
 }
