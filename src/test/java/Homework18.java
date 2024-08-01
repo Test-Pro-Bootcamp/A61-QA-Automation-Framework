@@ -14,5 +14,19 @@ public class Homework18 extends BaseTest {
         inputPassword("te$t$tudent");
         clickLoginButton();
 
+        //Play a song
+        clickMediaPlayButton();
+        validateSongIsPlaying();
+
+    }
+
+    private void clickMediaPlayButton() {
+        WebElement playButton = driver.findElement(By.cssSelector("span[class='play']"));
+        playButton.click();
+    }
+
+    private void validateSongIsPlaying() {
+        WebElement soundBars = driver.findElement(By.cssSelector("div[class='bars']"));
+        Assert.assertTrue(soundBars.isEnabled());
     }
 }
