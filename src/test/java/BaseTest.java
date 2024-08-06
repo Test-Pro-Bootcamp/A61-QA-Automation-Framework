@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
 import java.time.Duration;
@@ -13,25 +15,17 @@ public class BaseTest {
 
     public WebDriver driver = null;
     public String url = null;
+    public WebDriverWait wait = null;
 
     @DataProvider(name="IncorrectLoginData")
     public static Object[][] getDataFromDataProviders() {
+
         return new Object[][] {
-                {"invalid@testpro.io", "invalidPassword"},
+                {"invalid@testpro.io", "invalidPass"},
                 {"demo@testpro.io", ""},
                 {"", ""}
         };
     }
-
-    //without static keyword
-//    @DataProvider(name="IncorrectLoginData")
-//    public Object[][] getDataFromDataProviders() {
-//        return new Object[][] {
-//                {"invalid@testpro.io", "invalidPassword"},
-//                {"demo@testpro.io", ""},
-//                {"", ""}
-//        };
-//    }
 
     @BeforeSuite
     static void setupClass() {
@@ -41,16 +35,18 @@ public class BaseTest {
     @BeforeMethod
     @Parameters({"BaseURL"})
     public void launchBrowser(String BaseURL) {
-        //Added ChromeOptions argument below to fix websocket error
+        // Added ChromeOptions argument below to fix websocket error
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
 
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().window().maximize();
+
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         url = BaseURL;
         navigateToPage();
     }
-
     @AfterMethod
     public void closeBrowser() {
         driver.quit();
@@ -59,26 +55,26 @@ public class BaseTest {
         driver.get(url);
     }
     public void provideEmail(String email) {
-        WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
+        WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='email']")));
         emailField.clear();
         emailField.sendKeys(email);
     }
     public void providePassword(String password) {
-        WebElement passwordField = driver.findElement(By.cssSelector("input[type='password']"));
+        WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='password']")));
         passwordField.clear();
         passwordField.sendKeys(password);
     }
     public void clickLoginBtn() {
-        WebElement submit = driver.findElement(By.cssSelector("button[type='submit']"));
+        WebElement submit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[type='submit']")));
         submit.click();
     }
     public void provideProfileName(String randomName) {
-        WebElement profileName = driver.findElement(By.cssSelector("[name='name']"));
+        WebElement profileName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
         profileName.clear();
         profileName.sendKeys(randomName);
     }
     public void provideCurrentPassword(String password) {
-        WebElement currentPassword = driver.findElement(By.cssSelector("[name='current_password']"));
+        WebElement currentPassword = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='current_password']")));
         currentPassword.clear();
         currentPassword.sendKeys(password);
     }
