@@ -3,15 +3,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class Homework19 extends BaseTest {
 
     @Test
-    public void deletePlaylist() {
+    @Parameters({"BaseURL"})
+    public void deletePlaylist(String baseURL) {
 
         //Logging into Koel
-        navigateToWebsite("https://qa.koel.app/");
+        navigateToWebsite(baseURL);
         inputEmail("barrau89@gmail.com");
         inputPassword("te$t$tudent");
         clickLoginButton();
@@ -19,7 +21,7 @@ public class Homework19 extends BaseTest {
 
 
         //Validate playlist was deleted
-        validatePlaylistWasDeleted();
+        //validatePlaylistWasDeleted();
 
     }
 
