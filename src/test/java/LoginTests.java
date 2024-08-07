@@ -13,9 +13,9 @@ public class LoginTests extends BaseTest {
     }
 
     @Test (dataProvider = "LoginWithNegativeData")
-    @Parameters ({"BaseURL"})
+    // @Parameters ({"BaseURL"})
     public void loginWithNegativeData( String email, String password) throws InterruptedException {
-        navigateToWebsite("https://qa.koel.app/");
+        // no need to call launchBrowser method here because it has the 'BeforeMethod' annotation;
         inputEmail(email);
         inputPassword(password);
         clickLoginButton();

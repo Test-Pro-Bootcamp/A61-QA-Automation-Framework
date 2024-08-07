@@ -9,25 +9,25 @@ import org.testng.annotations.Test;
 public class Homework19 extends BaseTest {
 
     @Test
-    @Parameters({"BaseURL"})
     public void deletePlaylist(String baseURL) {
 
         //Logging into Koel
-        navigateToWebsite(baseURL);
         inputEmail("barrau89@gmail.com");
         inputPassword("te$t$tudent");
         clickLoginButton();
 
-
-
         //Validate playlist was deleted
-        //validatePlaylistWasDeleted();
+        validatePlaylistWasDeleted();
 
     }
 
 
     private void validatePlaylistWasDeleted() {
-        WebElement soundBars = driver.findElement(By.cssSelector("div[class='bars']"));
+        WebElement playlistToDelete = driver.findElement(By.cssSelector("#playlists > ul > li:nth-child(3)"));
+        playlistToDelete.click();
+        WebElement deletePlaylistButton = driver.findElement(By.cssSelector("button[class='del btn-delete-playlist']"));
+        deletePlaylistButton.click();
         Assert.assertTrue(soundBars.isEnabled());
     }
 }
+ // button.del.btn-delete-playlist
