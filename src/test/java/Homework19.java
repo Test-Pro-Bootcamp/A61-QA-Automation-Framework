@@ -8,12 +8,12 @@ import org.testng.annotations.Test;
 
 public class Homework19 extends BaseTest {
 
-    @Test
-    public void deletePlaylist(String baseURL) {
+    @Test (dataProvider = "LoginWithPositiveData")
+    public void deletePlaylist(String possitiveEmail, String possitivePassword) {
 
         //Logging into Koel
-        inputEmail("barrau89@gmail.com");
-        inputPassword("te$t$tudent");
+        inputEmail(possitiveEmail);
+        inputPassword(possitivePassword);
         clickLoginButton();
 
         //Validate playlist was deleted

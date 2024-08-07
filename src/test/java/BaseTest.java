@@ -22,6 +22,13 @@ public class BaseTest {
         };
     }
 
+    @DataProvider(name = "LoginWithPositiveData")
+    public Object [][] positiveData(){
+        return new Object[][]{
+                {"barrau89@gmail.com","te$t$tudent"}
+        };
+    }
+
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();    }
