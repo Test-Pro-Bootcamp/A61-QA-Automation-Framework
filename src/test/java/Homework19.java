@@ -27,7 +27,14 @@ public class Homework19 extends BaseTest {
         playlistToDelete.click();
         WebElement deletePlaylistButton = driver.findElement(By.cssSelector("button[class='del btn-delete-playlist']"));
         deletePlaylistButton.click();
-        Assert.assertTrue(soundBars.isEnabled());
+
+        verifyPopUpAppeared();
+    }
+
+    private void verifyPopUpAppeared(){
+        WebElement greenBoxPopUp = driver.findElement(By.cssSelector("div[class='success show']"));
+        String popUpLabel = greenBoxPopUp.getText();
+        Assert.assertTrue(popUpLabel.contains("Deleted playlist"), "Pop-up does not contain the expected substring.");
     }
 }
  // button.del.btn-delete-playlist
