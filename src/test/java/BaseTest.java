@@ -5,10 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 import java.time.Duration;
 
@@ -16,6 +13,14 @@ public class BaseTest {
 
     public WebDriver driver;
     public WebDriverWait wait;
+
+    @DataProvider(name = "LoginWithNegativeData")
+    public Object [][] getDataFromDataProvider(){
+        return new Object[][]{
+                {"invalidEmail@email.com","invalidPassword"},
+                {"","te$t$tudent"}
+        };
+    }
 
     @BeforeSuite
     static void setupClass() {

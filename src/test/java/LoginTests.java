@@ -12,6 +12,17 @@ public class LoginTests extends BaseTest {
         Assert.assertEquals(driver.getCurrentUrl(), baseURL);
     }
 
+    @Test (dataProvider = "LoginWithNegativeData")
+    @Parameters ({"BaseURL"})
+    public void loginWithNegativeData( String email, String password) throws InterruptedException {
+        navigateToWebsite("https://qa.koel.app/");
+        inputEmail(email);
+        inputPassword(password);
+        clickLoginButton();
+        Thread.sleep(2000);
+        Assert.assertEquals(driver.getCurrentUrl(), "https://qa.koel.app/");
+    }
+
     @Test
     @Parameters ({"BaseURL"})
     public void loginWithEmailAndPassword(String baseURL) {
