@@ -1,25 +1,41 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
-
 public class LoginTests extends BaseTest {
+
+
     @Test
-    public void loginEmptyEmailPassword() {
-
-//      Added ChromeOptions argument below to fix websocket error
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-        String url = "https://qa.koel.app/";
-        driver.get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
+    @Parameters ({"BaseURL"})
+    public void loginEmptyEmailPassword(String baseURL) {
+        navigateToWebsite(baseURL);
+        Assert.assertEquals(driver.getCurrentUrl(), baseURL);
     }
+
+    @Test (dataProvider = "LoginWithNegativeData")
+    // @Parameters ({"BaseURL"})
+    public void loginWithNegativeData( String email, String password) throws InterruptedException {
+        // no need to call launchBrowser method here because it has the 'BeforeMethod' annotation;
+        inputEmail(email);
+        inputPassword(password);
+        clickLoginButton();
+        Thread.sleep(2000);
+        Assert.assertEquals(driver.getCurrentUrl(), "https://qa.koel.app/");
+    }
+
+    @Test
+    @Parameters ({"BaseURL"})
+    public void loginWithEmailAndPassword(String baseURL) {
+
+        // Step 1
+        navigateToWebsite(baseURL);
+        // Step 2
+        inputEmail("barrau89@gmail.com");
+        // Step 3
+        inputPassword("te$t$tudent");
+        // Step 4
+        clickLoginButton();
+    }
+
+
 }
