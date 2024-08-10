@@ -21,7 +21,6 @@ public class Homework19 extends BaseTest {
 
     }
 
-
     private void validatePlaylistWasDeleted() {
         WebElement playlistToDelete = driver.findElement(By.cssSelector("#playlists > ul > li:nth-child(3)"));
         playlistToDelete.click();
@@ -37,4 +36,3 @@ public class Homework19 extends BaseTest {
         Assert.assertTrue(popUpLabel.contains("Deleted playlist"), "Pop-up does not contain the expected substring.");
     }
 }
- // button.del.btn-delete-playlist
