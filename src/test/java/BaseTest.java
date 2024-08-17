@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
@@ -11,8 +13,14 @@ import java.time.Duration;
 
 public class BaseTest {
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public Actions actions;
     public WebDriver driver;
     public WebDriverWait wait;
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
     @DataProvider(name = "LoginWithNegativeData")
     public Object [][] getDataFromDataProvider(){
@@ -29,6 +37,7 @@ public class BaseTest {
         };
     }
 
+
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();    }
@@ -43,19 +52,25 @@ public class BaseTest {
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        //fluentWait = new FluentWait(driver).withTimeout(Duration.ofSeconds(10)).pollingEvery(Duration.ofSeconds(2));
+        actions = new Actions(driver);
+
         navigateToWebsite(baseURL);
 
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
-
-    @AfterMethod
-    public void closeBrowser(){
-        driver.quit();
-    }
-
 
     public void navigateToWebsite(String url){
         driver.get(url);
+    }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void loginIntoKoel(String email, String password){
+        inputEmail(email);
+        inputPassword(password);
+        clickLoginButton();
     }
 
     public void inputEmail(String email){
@@ -73,5 +88,27 @@ public class BaseTest {
     public void clickLoginButton(){
         WebElement loginButton = driver.findElement(By.cssSelector("button[type='submit']"));
         loginButton.click();
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    public WebElement hoverPlayButton(){
+        WebElement play = driver.findElement(By.cssSelector("[data-testid='play-btn']"));
+        actions.moveToElement(play).perform();
+        return wait.until(ExpectedConditions.visibilityOf(play));
+    }
+
+    public boolean isSongPlaying() {
+        WebElement soundBars = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-testid= 'sound-bar-play']")));
+        return soundBars.isDisplayed();
+
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+    @AfterMethod
+    public void closeBrowser(){
+        driver.quit();
     }
 }

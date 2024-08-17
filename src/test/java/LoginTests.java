@@ -19,7 +19,7 @@ public class LoginTests extends BaseTest {
         inputEmail(email);
         inputPassword(password);
         clickLoginButton();
-        Thread.sleep(2000);
+        // Thread.sleep(2000);
         Assert.assertEquals(driver.getCurrentUrl(), "https://qa.koel.app/");
     }
 
