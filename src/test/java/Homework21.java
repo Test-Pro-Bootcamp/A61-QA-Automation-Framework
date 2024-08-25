@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 public class Homework21 extends BaseTest {
 
-    public String currentPlaylistName = "countSongsPlaylist";
+    public String currentPlaylistName = "Homework21";
     public String newPlaylistName = "newPlaylistName";
 
     @Test (dataProvider = "LoginWithPositiveData")
@@ -25,6 +25,9 @@ public class Homework21 extends BaseTest {
 
         //rename Playlist
         renamePlaylist(newPlaylistName);
+
+        //verify changes
+
 
     }
 
