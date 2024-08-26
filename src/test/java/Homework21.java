@@ -1,11 +1,13 @@
+import org.checkerframework.checker.units.qual.K;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
 public class Homework21 extends BaseTest {
 
-    public String currentPlaylistName = "Homework21";
+    public String currentPlaylistName = "Homework2";
     public String newPlaylistName = "newPlaylistName";
 
     @Test (dataProvider = "LoginWithPositiveData")
@@ -27,7 +29,7 @@ public class Homework21 extends BaseTest {
         renamePlaylist(newPlaylistName);
 
         //verify changes
-
+        verifyPopUpAppeared(newPlaylistName);
 
     }
 
@@ -38,7 +40,8 @@ public class Homework21 extends BaseTest {
     }
 
     private void contextClickPlaylist(String playlistName) {
-        WebElement playlist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("a[contains(text(),'"+playlistName+"')]")));
+        WebElement playlist = wait.until(ExpectedConditions.visibilityOfElementLocated(
+        By.xpath("//*[@id='playlists']/ul/li/a[contains(text(),'" + playlistName + "')]")));
         actions.contextClick(playlist).perform();
     }
     private void selectEditPlaylist(){
@@ -46,10 +49,19 @@ public class Homework21 extends BaseTest {
         editPlaylist.click();
     }
     private void renamePlaylist(String newPlaylistName){
-        WebElement playlistNameInputField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[name='name'][data-testid='inline-playlist-name-input']")));
-        playlistNameInputField.clear();
+
+        WebElement playlistNameInputField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
+    //            "input[name='name'][data-testid='inline-playlist-name-input']"
+                "[name='name']"
+        )));
+        //playlistNameInputField.clear();
+        playlistNameInputField.sendKeys(Keys.chord(Keys.CONTROL,"A", Keys.BACK_SPACE));
+
         playlistNameInputField.sendKeys(newPlaylistName);
+        playlistNameInputField.sendKeys(Keys.ENTER);
     }
+
+
 
 
 }
