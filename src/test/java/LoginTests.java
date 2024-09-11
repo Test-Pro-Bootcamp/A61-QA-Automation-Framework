@@ -1,15 +1,11 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
-
 public class LoginTests extends BaseTest {
-    @Test(enabled = true, priority = 0, description = " login Invalid Email Valid password")
+    @Test
     public void loginInvalidEmailPassword() throws InterruptedException {
         provideEmail("Shuban1.laddu@gmail.com");
         providePassword("Pavani@10");
@@ -21,19 +17,22 @@ public class LoginTests extends BaseTest {
         Assert.assertEquals(driver.getCurrentUrl(), url);
     }
 
-    @Test(enabled = true, priority = 1, description = "login Valid Email Valid Password")
+    @Test
     public void loginValidEmailPassword() throws InterruptedException {
         provideEmail("Shuban.laddu@gmail.com");
         providePassword("Pavani@10");
         loginBtn();
-        Thread.sleep(2000);
+        /* Thread.sleep(2000); */
         String url = "https://qa.koel.app/";
-        WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
+        //WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
+        WebElement avatarIcon;
+        avatarIcon = wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.cssSelector("img[class='avatar']")));
         //Assertions Expected VS Actual
         Assert.assertTrue(avatarIcon.isDisplayed());
     }
 
-    @Test(enabled = true, priority = 2, description = "login Empty Email Empty Password")
+    @Test
     public void loginEmptyEmailEmptyPassword() throws InterruptedException {
         provideEmail("         ");
         providePassword("       ");
@@ -44,7 +43,7 @@ public class LoginTests extends BaseTest {
 
     }
 
-    @Test(enabled = true, priority = 3, description = "login Valid Email Empty Password")
+    @Test
     public void loginValidEmailEmptyPassword() throws InterruptedException {
         provideEmail("Shuban.laddu@gmail.com");
         providePassword("        ");
