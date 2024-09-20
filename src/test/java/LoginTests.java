@@ -1,3 +1,5 @@
+import Pages.HomePage;
+import Pages.LoginPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -63,4 +65,17 @@ public class LoginTests extends BaseTest {
         String url = " https://qa.koel.app/";
         Assert.assertEquals(driver.getCurrentUrl(), url);
     }
+    @Test
+    public void PositiveLoginTest(){
+        //Objects
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        //Steps
+        loginPage.provideEmail("Shuban.laddu@gmail.com");
+        loginPage.providePassword("Pavani@10");
+        loginPage.loginBtn();
+        //Assertion E
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+    }
+
 }
