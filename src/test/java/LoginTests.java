@@ -1,3 +1,4 @@
+import PageFactory.LoginPageFactory;
 import Pages.HomePage;
 import Pages.LoginPage;
 import org.openqa.selenium.By;
@@ -74,6 +75,19 @@ public class LoginTests extends BaseTest {
         loginPage.provideEmail("Shuban.laddu@gmail.com");
         loginPage.providePassword("Pavani@10");
         loginPage.loginBtn();
+        //Assertion E
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+    }
+    @Test
+    public void PositiveLoginTestWithPageFactory(){
+        //Objects
+       // LoginPage loginPage = new LoginPage(driver);
+        LoginPageFactory loginPageFactory = new LoginPageFactory(driver);
+        HomePage homePage = new HomePage(driver);
+        //Steps
+        loginPageFactory.provideEmail("Shuban.laddu@gmail.com")
+        .providePassword("Pavani@10")
+        .loginBtn();
         //Assertion E
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
     }
