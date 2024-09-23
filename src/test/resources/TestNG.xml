@@ -7,9 +7,11 @@
         <classes>
             <class name="BaseTest"/>
             <class name="LoginTests"/>
+            <class name="AllSongsTest"/>
             <class name="Pages.BasePage"/>
             <class name="Pages.LoginPage"/>
             <class name="Pages.HomePage"/>
+            <class name=" Pages.AllSongsPage"/>
 
         </classes>
     </test>

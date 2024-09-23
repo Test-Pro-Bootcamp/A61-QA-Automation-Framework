@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 public class Homework20 extends BaseTest {
     @Test
-    public void DeletePlaylistTest()throws InterruptedException{
+    public void DeletePlaylistTest() throws InterruptedException {
         String expectedPlaylistDeletedMsg = "Deleted playlist \"veena.\"";
 
         provideEmail("Shuban.laddu@gmail.com");
@@ -18,8 +18,9 @@ public class Homework20 extends BaseTest {
         OpenSelectedPlaylist();
         clickDeletePlaylistBtn();
         byte[] expectedPlaylistDeletedMessage;
-        Assert.assertEquals(getDeletedPlaylistMsg(),expectedPlaylistDeletedMsg);
+        Assert.assertEquals(getDeletedPlaylistMsg(), expectedPlaylistDeletedMsg);
     }
+
     public void OpenSelectedPlaylist() throws InterruptedException {
         //WebElement PlaylistName = driver.findElement(By.cssSelector("li.playlist:nth-child(3)"));
         WebElement PlaylistName = wait.until(ExpectedConditions.visibilityOfElementLocated
@@ -27,20 +28,23 @@ public class Homework20 extends BaseTest {
         PlaylistName.click();
         /* Thread.sleep(2000); */
     }
-    public void clickDeletePlaylistBtn() throws InterruptedException{
-       // WebElement DeletePlaylistBtn = driver.findElement(By.cssSelector("button[class='del btn-delete-playlist']"));
-        WebElement DeletedPlaylistBtn= wait.until(ExpectedConditions.visibilityOfElementLocated
+
+    public void clickDeletePlaylistBtn() throws InterruptedException {
+        // WebElement DeletePlaylistBtn = driver.findElement(By.cssSelector("button[class='del btn-delete-playlist']"));
+        WebElement DeletedPlaylistBtn = wait.until(ExpectedConditions.visibilityOfElementLocated
                 (By.cssSelector("button[class='del btn-delete-playlist']")));
         DeletedPlaylistBtn.click();
         //Thread.sleep(2000);
     }
-    public String getDeletedPlaylistMsg()throws InterruptedException{
-       // WebElement notificationMsg = driver.findElement(By.cssSelector("div.success.show"));
+
+    public String getDeletedPlaylistMsg() throws InterruptedException {
+        // WebElement notificationMsg = driver.findElement(By.cssSelector("div.success.show"));
         WebElement notificationMsg = wait.until(ExpectedConditions.visibilityOfElementLocated
                 (By.cssSelector("div.success.show")));
         return notificationMsg.getText();
     }
-    @Test
+}
+   /* @Test
     public void PlayAllSongs() throws InterruptedException {
         //login
         provideEmail("Shuban.laddu@gmail.com");
@@ -87,6 +91,6 @@ public class Homework20 extends BaseTest {
              (By.cssSelector("li a.songs")));
      AllSongslist.click();
     }
-}
+}*/
 
 

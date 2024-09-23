@@ -15,11 +15,11 @@ import java.time.Duration;
 
   public class BaseTest {
 
-    public WebDriver driver;
-    WebDriverWait wait = null;
-    Actions action;
+      public WebDriver driver;
+      WebDriverWait wait = null;
+      Actions action;
 
-    /* public String url="https://qa.koel.app/"; */
+      /* public String url="https://qa.koel.app/"; */
    /* @DataProvider(name="LoginNegativeTestData")
         public Object[][] getDataFromDataProvider(){
         return new Object[][]  {
@@ -29,51 +29,62 @@ import java.time.Duration;
                 {"          ", " Veena@123  "},
         };
         }*/
-        @BeforeSuite
-        static void setupClass() {
-        WebDriverManager.chromedriver().setup();
+      @BeforeSuite
+      static void setupClass() {
+          WebDriverManager.chromedriver().setup();
       }
+
       @BeforeMethod
-     @Parameters({"BaseURL"})
-      public void launchBrowser(String baseURL){
-        // add chromeArguments
-        String url= baseURL;
-        ChromeOptions options =new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
-        wait = new WebDriverWait(driver,Duration.ofSeconds(10));
-        action = new Actions(driver);
-        navigateToPage(url);
+      @Parameters({"BaseURL"})
+      public void launchBrowser(String baseURL) {
+          // add chromeArguments
+          String url = baseURL;
+          ChromeOptions options = new ChromeOptions();
+          options.addArguments("--remote-allow-origins=*");
+          driver = new ChromeDriver(options);
+          driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+          driver.manage().window().maximize();
+          wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+          action = new Actions(driver);
+          navigateToPage(url);
 
       }
+
       @AfterMethod
-      public void closeBrowser(){
-        driver.quit();
+      public void closeBrowser() {
+          driver.quit();
       }
-      public void navigateToPage(String url){
-        driver.get(url);
+
+      public void navigateToPage(String url) {
+          driver.get(url);
       }
-      public void provideEmail(String email){
-        WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated
-                (By.cssSelector("input[type='email']")));
-                // driver.findElement(By.cssSelector("input[type='email']"));
-        emailField.clear();
-        emailField.sendKeys(email);
-       }
-       public void providePassword(String password) {
-           WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated
-                   (By.cssSelector("input[type='password']")));
-           passwordField.clear();
-           passwordField.sendKeys(password);
-       }
 
-           protected void loginBtn() {
+      public void provideEmail(String email) {
+          WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated
+                  (By.cssSelector("input[type='email']")));
+          // driver.findElement(By.cssSelector("input[type='email']"));
+          emailField.clear();
+          emailField.sendKeys(email);
+      }
 
-               WebElement loginButton= driver.findElement(By.cssSelector("button[type='submit']"));
+      public void providePassword(String password) {
+          WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated
+                  (By.cssSelector("input[type='password']")));
+          passwordField.clear();
+          passwordField.sendKeys(password);
+      }
+
+      public void loginBtn() {
+
+          WebElement loginButton = driver.findElement(By.cssSelector("button[type='submit']"));
           /* WebElement   loginButton = wait.until(ExpectedConditions.visibilityOfElementLocated
                        (By.cssSelector("input[type='submit']")));*/
-               loginButton.click();
-          }
+          loginButton.click();
       }
+
+      public WebElement isSongPlayingBars() {
+          WebElement SoundBar1= wait.until(ExpectedConditions.visibilityOfElementLocated
+                  (By.cssSelector("img[alt='Sound bars']")));
+          return SoundBar1;
+      }
+  }

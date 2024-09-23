@@ -26,4 +26,15 @@ public class BasePage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 
     }
+    public void clickAllSongsList() {
+        WebElement AllSongslist= wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.cssSelector("li a.songs")));
+        AllSongslist.click();
+    }
+    public boolean isSongPlayingBars() {
+        WebElement SoundBar= wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.cssSelector("img[alt='Sound bars']")));
+        return SoundBar;
+    }
+
 }

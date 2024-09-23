@@ -25,8 +25,4 @@ public class PlaySongs extends BaseTest{
         WebElement soundBar = driver.findElement(By.xpath("//div[@data-testid='sound-bar-play']"));
         return soundBar.isDisplayed();
     }
-
-
-
-
 }
