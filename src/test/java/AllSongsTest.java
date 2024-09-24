@@ -12,7 +12,7 @@ public class AllSongsTest extends BaseTest{
     public void PlaySongswithcontextclick() throws InterruptedException {
         LoginPage loginPage =new LoginPage(driver);
         HomePage   homePage = new HomePage(driver);
-        AllSongsPage allSongsPage= new AllSongsPage(driver);
+        AllSongsPage allSongsPage = new AllSongsPage(driver);
         loginPage.login();
 
         //login
@@ -28,10 +28,10 @@ public class AllSongsTest extends BaseTest{
         Thread.sleep(2000);
         //contextclick
         //click on play button
-       allSongsPage.clickPlayBtn();
+      // allSongsPage.clickPlayBtn();
         Thread.sleep(2000);
         //verifying the song playing
-        Assert.assertTrue(allSongsPage.isSongPlayingBars());
+        Assert.assertTrue(allSongsPage.isSongPlayingBars().isDisplayed());
     }
 }
 

@@ -32,4 +32,5 @@ public class LoginPageFactory extends BasePage {
         loginBtn.click();
         return this;
     }
+
 }
