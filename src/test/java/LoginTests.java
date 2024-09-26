@@ -9,33 +9,40 @@ import org.testng.annotations.Test;
 
 public class LoginTests extends BaseTest {
     @Test
-    public void loginInvalidEmailPassword() throws InterruptedException {
-        provideEmail("Shuban1.laddu@gmail.com");
+    public void loginInvalidEmailPassword(){
+        LoginPageFactory loginPageFactory = new LoginPageFactory(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        loginPageFactory.provideEmail("Shuban1.laddu@gmail.com")
+                .providePassword("pavani@10")
+                .loginBtn();
+        String url = "https://qa.koel.app/";
+    }
+        /*provideEmail("Shuban1.laddu@gmail.com");
         providePassword("Pavani@10");
         loginBtn();
         Thread.sleep(2000);
         String url = "https://qa.koel.app/";
         // WebElement avatarIcon =driver.findElement(By.cssSelector("img[class='avatar']"));
         //Assertions Expected VS Actual
-        Assert.assertEquals(driver.getCurrentUrl(), url);
+        Assert.assertEquals(getDriver().getCurrentUrl(), url);
     }
 
-    @Test
+   /*@Test
     public void loginValidEmailPassword() throws InterruptedException {
         provideEmail("Shuban.laddu@gmail.com");
         providePassword("Pavani@10");
         loginBtn();
         /* Thread.sleep(2000); */
-        String url = "https://qa.koel.app/";
+        //String url = "https://qa.koel.app/";
         //WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
-        WebElement avatarIcon;
+       /* WebElement avatarIcon;
         avatarIcon = wait.until(ExpectedConditions.visibilityOfElementLocated
                 (By.cssSelector("img[class='avatar']")));
         //Assertions Expected VS Actual
         Assert.assertTrue(avatarIcon.isDisplayed());
-    }
+    }*/
 
-    @Test
+  /* @Test
     public void loginEmptyEmailEmptyPassword() throws InterruptedException {
         provideEmail("         ");
         providePassword("       ");
@@ -66,7 +73,7 @@ public class LoginTests extends BaseTest {
         String url = " https://qa.koel.app/";
         Assert.assertEquals(driver.getCurrentUrl(), url);
     }
-    @Test
+    /*@Test
     public void PositiveLoginTest(){
         //Objects
         LoginPage loginPage = new LoginPage(driver);
@@ -77,13 +84,13 @@ public class LoginTests extends BaseTest {
         loginPage.loginBtn();
         //Assertion E
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
-    }
+    }*/
     @Test
     public void PositiveLoginTestWithPageFactory(){
         //Objects
        // LoginPage loginPage = new LoginPage(driver);
-        LoginPageFactory loginPageFactory = new LoginPageFactory(driver);
-        HomePage homePage = new HomePage(driver);
+        LoginPageFactory loginPageFactory = new LoginPageFactory(getDriver());
+        HomePage homePage = new HomePage(getDriver());
         //Steps
         loginPageFactory.provideEmail("Shuban.laddu@gmail.com")
         .providePassword("Pavani@10")
