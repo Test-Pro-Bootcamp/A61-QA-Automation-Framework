@@ -18,5 +18,32 @@ dependencies {
 test {
     useTestNG() {
         suites "src/test/resources/TestNG.xml"
+        systemProperty "browser", System.getProperty("browser")
     }
+
 }
+task testSmoke(type: Test){
+    useTestNG() {
+        suites "src/test/resources/SmokeTest.xml"
+    }
+
+}
+task RegressionTest(type: Test){
+    useTestNG() {
+        suites "src/test/resources/RegressionTest.xml"
+    }
+
+}
+task PlayNextSongVerifyPOM(type: Test){
+    useTestNG() {
+        suites "src/test/resources/PlayNextSongVerifyPOM.xml"
+    }
+
+}
+task ParallelTesting(type: Test){
+    useTestNG() {
+        suites "src/test/resources/ParallelTesting.xml"
+    }
+
+}
+
